@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple collection of AI-powered study tools." />
+    <title>StudyMate AI — Simple student tools</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Study tool navigation">
+        <a class="brand" href="#home" data-page="home" aria-label="StudyMate AI home">
+          <span class="brand-mark">S</span><span>StudyMate<span class="brand-dot">AI</span></span>
+        </a>
+
+        <nav class="tool-nav">
+          <p class="nav-label">WORKSPACE</p>
+          <button class="nav-link active" data-page="home"><span>⌂</span> Overview</button>
+          <p class="nav-label">CREATE &amp; LEARN</p>
+          <button class="nav-link" data-page="resume"><span>▤</span> Resume builder</button>
+          <button class="nav-link" data-page="notes"><span>✦</span> Notes generator</button>
+          <button class="nav-link" data-page="slides"><span>▣</span> Slide maker</button>
+          <button class="nav-link" data-page="mindmap"><span>⌘</span> Mind map</button>
+          <button class="nav-link" data-page="quiz"><span>✓</span> Quiz maker</button>
+          <button class="nav-link" data-page="tutor"><span>◌</span> Ask a tutor</button>
+          <button class="nav-link" data-page="flashcards"><span>↻</span> Flashcards</button>
+          <button class="nav-link" data-page="planner"><span>▦</span> Study planner</button>
+          <button class="nav-link" data-page="photo"><span>◫</span> Photo notes</button>
+          <p class="nav-label">DATA</p>
+          <button class="nav-link" data-page="sheets"><span>▥</span> Sheets dashboard</button>
+        </nav>
+
+        <div class="sidebar-card">
+          <span class="tiny-icon">✦</span>
+          <div><strong>Demo mode is on</strong><small>Every tool works with sample AI output.</small></div>
+          <button class="text-button" id="open-settings">Connect Gemini</button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="mobile-menu" id="mobile-menu" aria-label="Open navigation">☰</button>
+          <div>
+            <p class="eyebrow" id="page-kicker">YOUR LEARNING SPACE</p>
+            <h1 id="page-title">Good morning, learner.</h1>
+          </div>
+          <div class="topbar-actions">
+            <span class="mode-pill" id="mode-pill"><i></i> Demo mode</span>
+            <button class="icon-button" id="settings-button" aria-label="AI settings">⚙</button>
+          </div>
+        </header>
+
+        <section class="page active" id="home-page">
+          <div class="hero-card">
+            <div>
+              <p class="eyebrow warm">ONE SIMPLE PLACE</p>
+              <h2>Turn study work into<br /><em>small wins.</em></h2>
+              <p>Build, revise, plan, and ask questions with ten friendly tools in one place.</p>
+              <button class="primary-button" data-go="notes">Start with your notes <span>→</span></button>
+            </div>
+            <div class="hero-orbit" aria-hidden="true">
+              <span class="orbit-card orbit-card-one">✦<small>Notes</small></span>
+              <span class="orbit-card orbit-card-two">✓<small>Quiz</small></span>
+              <span class="orbit-card orbit-card-three">▦<small>Plan</small></span>
+              <div class="orbit-center">✦</div>
+            </div>
+          </div>
+
+          <div class="section-heading"><div><p class="eyebrow">YOUR TOOLKIT</p><h2>What would you like to make?</h2></div><span class="tool-count">10 simple tools</span></div>
+          <div class="tool-grid" id="tool-grid"></div>
+        </section>
+
+        <section class="page" id="resume-page">
+          <div class="page-intro"><div><p class="eyebrow">CAREER TOOL</p><h2>Build a polished resume</h2><p>Fill in the essentials and turn them into a clear, professional resume.</p></div><span class="feature-icon peach">▤</span></div>
+          <div class="two-column resume-layout">
+            <form class="panel form-panel" id="resume-form">
+              <div class="form-grid">
+                <label>Full name<input name="name" required placeholder="e.g. Priya Sharma" /></label>
+                <label>Contact details<input name="contact" required placeholder="email · phone · city" /></label>
+                <label>Education<textarea name="education" required placeholder="B.Sc. Computer Science, 2026"></textarea></label>
+                <label>Skills<textarea name="skills" required placeholder="Python, communication, problem-solving"></textarea></label>
+                <label class="full-width">Experience / projects<textarea name="experience" required placeholder="Internship, coursework, volunteer work or projects"></textarea></label>
+                <label class="full-width">Career objective<textarea name="objective" placeholder="What role or opportunity are you looking for?"></textarea></label>
+              </div>
+              <button class="primary-button" type="submit">Generate my resume <span>→</span></button>
+            </form>
+            <article class="panel output-panel resume-paper" id="resume-output"><div class="empty-state"><span>▤</span><h3>Your resume will appear here</h3><p>Add your details, then create a draft you can polish.</p></div></article>
+          </div>
+          <div class="output-actions hidden" data-actions="resume-output"><button class="secondary-button" data-print="resume-output">Print / save PDF</button><button class="secondary-button" data-copy="resume-output">Copy text</button></div>
+        </section>
+
+        <section class="page" id="notes-page">
+          <div class="page-intro"><div><p class="eyebrow">STUDY TOOL</p><h2>Make clear study notes</h2><p>Paste a topic, paragraph, or chapter summary. We will organize the important ideas.</p></div><span class="feature-icon yellow">✦</span></div>
+          <div class="two-column">
+            <form class="panel form-panel" id="notes-form">
+              <label>Topic or source text<textarea name="source" required rows="14" placeholder="Paste a paragraph or write a topic, such as ‘Photosynthesis: light reactions and the Calvin cycle’."></textarea></label>
+              <label>Notes style<select name="style"><option value="short">Short revision notes</option><option value="detailed">Detailed class notes</option><option value="exam">Exam-focused notes</option></select></label>
+              <button class="primary-button" type="submit">Create notes <span>→</span></button>
+            </form>
+            <article class="panel output-panel markdown-output" id="notes-output"><div class="empty-state"><span>✦</span><h3>Clean notes, ready to revise</h3><p>Headings and short bullet points will show up here.</p></div></article>
+          </div>
+          <div class="output-actions hidden" data-actions="notes-output"><button class="secondary-button" data-copy="notes-output">Copy notes</button><button class="secondary-button" data-download="notes-output" data-filename="studymate-notes.txt">Download .txt</button></div>
+        </section>
+
+        <section class="page" id="slides-page">
+          <div class="page-intro"><div><p class="eyebrow">PRESENTATION TOOL</p><h2>Make a mini presentation</h2><p>Enter a topic to create a simple, slide-by-slide explanation.</p></div><span class="feature-icon blue">▣</span></div>
+          <form class="inline-form panel" id="slides-form"><label>Presentation topic<input name="topic" required placeholder="e.g. The water cycle" /></label><label>Number of slides<select name="count"><option value="5">5 slides</option><option value="6">6 slides</option><option value="7">7 slides</option></select></label><button class="primary-button" type="submit">Create slides <span>→</span></button></form>
+          <div class="slides-stage hidden" id="slides-stage"><div class="slide-progress"><span id="slide-number">Slide 1 of 5</span><div><button class="round-button" id="slide-prev" aria-label="Previous slide">←</button><button class="round-button" id="slide-next" aria-label="Next slide">→</button></div></div><article class="study-slide" id="study-slide"></article></div>
+          <div class="empty-stage" id="slides-empty">Enter a topic to build your first set of slides.</div>
+        </section>
+
+        <section class="page" id="mindmap-page">
+          <div class="page-intro"><div><p class="eyebrow">VISUAL LEARNING</p><h2>See the bigger picture</h2><p>Transform a syllabus or topic list into a visual revision map.</p></div><span class="feature-icon purple">⌘</span></div>
+          <div class="two-column mindmap-layout">
+            <form class="panel form-panel" id="mindmap-form"><label>Syllabus or topic list<textarea name="source" required rows="12" placeholder="Biology: cell structure, cell division, genetics, ecology"></textarea></label><button class="primary-button" type="submit">Build mind map <span>→</span></button><p class="helper-text">Tip: separate ideas with commas, lines, or semicolons.</p></form>
+            <div class="panel map-panel"><div class="map-controls"><strong id="map-title">Your mind map</strong><div><button class="round-button small" id="map-zoom-out" aria-label="Zoom out">−</button><button class="round-button small" id="map-zoom-in" aria-label="Zoom in">+</button></div></div><div class="mindmap-canvas" id="mindmap-output"><div class="empty-state"><span>⌘</span><h3>Topics become connected ideas</h3><p>Click any branch to see a focused revision tip.</p></div></div></div>
+          </div>
+          <aside class="focus-note hidden" id="focus-note"><span>✦</span><div><strong id="focus-title">Topic focus</strong><p id="focus-text"></p></div></aside>
+        </section>
+
+        <section class="page" id="quiz-page">
+          <div class="page-intro"><div><p class="eyebrow">PRACTICE TOOL</p><h2>Test yourself with a quiz</h2><p>Use any subject, idea, or set of notes to create quick practice questions.</p></div><span class="feature-icon green">✓</span></div>
+          <form class="inline-form panel" id="quiz-form"><label>What should we quiz you on?<input name="topic" required placeholder="e.g. Newton's laws of motion" /></label><label>Questions<select name="count"><option value="5">5 questions</option><option value="7">7 questions</option><option value="10">10 questions</option></select></label><button class="primary-button" type="submit">Make quiz <span>→</span></button></form>
+          <div id="quiz-output" class="quiz-list"><div class="empty-stage">Your questions will appear here. Choose a topic to begin.</div></div>
+          <div class="score-card hidden" id="quiz-score"></div>
+        </section>
+
+        <section class="page" id="tutor-page">
+          <div class="page-intro"><div><p class="eyebrow">YOUR STUDY BUDDY</p><h2>Ask a friendly tutor</h2><p>Get a simple explanation, then ask a follow-up question whenever you need one.</p></div><span class="feature-icon coral">◌</span></div>
+          <section class="chat-shell panel"><div class="chat-top"><div><span class="tutor-avatar">✦</span><strong>StudyMate Tutor</strong><small>Explains things simply</small></div><button class="secondary-button compact" id="clear-chat">Clear chat</button></div><div class="chat-messages" id="chat-messages"><div class="chat-message bot"><span class="message-avatar">✦</span><p>Hi! What would you like help understanding today?</p></div></div><form class="chat-form" id="chat-form"><input name="message" required autocomplete="off" placeholder="Ask a subject question…" /><button class="primary-button" type="submit">Send <span>↑</span></button></form></section>
+        </section>
+
+        <section class="page" id="flashcards-page">
+          <div class="page-intro"><div><p class="eyebrow">REVISION TOOL</p><h2>Flip through flashcards</h2><p>Use a topic or notes to make a quick active-recall deck.</p></div><span class="feature-icon rose">↻</span></div>
+          <form class="inline-form panel" id="flashcards-form"><label>Topic or study text<input name="topic" required placeholder="e.g. The parts of a plant cell" /></label><label>Cards<select name="count"><option value="6">6 cards</option><option value="8">8 cards</option><option value="10">10 cards</option></select></label><button class="primary-button" type="submit">Make cards <span>→</span></button></form>
+          <div class="flashcard-area hidden" id="flashcard-area"><p class="card-counter" id="card-counter">Card 1 of 6</p><button class="flashcard" id="flashcard" aria-label="Flip flashcard"><span class="card-face card-front"><small>QUESTION</small><strong id="flashcard-question"></strong><em>Click to reveal answer</em></span><span class="card-face card-back"><small>ANSWER</small><strong id="flashcard-answer"></strong><em>Click to see question</em></span></button><div class="deck-actions"><button class="secondary-button" id="card-next">Next card →</button><button class="secondary-button" id="card-shuffle">↻ Shuffle deck</button></div></div>
+          <div class="empty-stage" id="flashcards-empty">Create a deck to start your revision.</div>
+        </section>
+
+        <section class="page" id="planner-page">
+          <div class="page-intro"><div><p class="eyebrow">ORGANIZE YOUR WEEK</p><h2>Plan a balanced study week</h2><p>Tell us what you are studying and how much time you have. We will make a clear starting plan.</p></div><span class="feature-icon indigo">▦</span></div>
+          <form class="panel planner-form" id="planner-form"><label>Subjects (separate with commas)<input name="subjects" required placeholder="Maths, Physics, English" /></label><label>Hours available each day<input name="hours" required type="number" min="1" max="12" value="2" /></label><label>Target / exam date<input name="date" type="date" /></label><button class="primary-button" type="submit">Create my plan <span>→</span></button></form>
+          <div class="schedule-wrap hidden" id="schedule-wrap"><div class="schedule-header"><div><p class="eyebrow">YOUR NEXT 7 DAYS</p><h3>Small sessions, steady progress.</h3></div><button class="secondary-button" id="regenerate-plan">↻ Regenerate</button></div><div class="schedule-grid" id="schedule-grid"></div><div class="schedule-key" id="schedule-key"></div></div>
+          <div class="empty-stage" id="planner-empty">Your personalized week will appear here.</div>
+        </section>
+
+        <section class="page" id="photo-page">
+          <div class="page-intro"><div><p class="eyebrow">PHOTO TO NOTES</p><h2>Summarize a note photo</h2><p>Upload an image, review its text, then turn it into short revision points.</p></div><span class="feature-icon aqua">◫</span></div>
+          <div class="two-column photo-layout"><section class="panel form-panel"><label class="upload-box" for="note-image"><input id="note-image" type="file" accept="image/*" /><span class="upload-icon">↑</span><strong>Choose a photo of your notes</strong><small>JPG, PNG, or WEBP</small></label><div class="image-preview hidden" id="image-preview"><img id="note-image-preview" alt="Selected note" /></div><button class="secondary-button full-button" id="extract-text" type="button">Extract text from photo</button><p class="helper-text" id="ocr-status">You can also type or paste text below if OCR is unavailable.</p><label>Check or edit extracted text<textarea id="extracted-text" rows="10" placeholder="Your extracted note text will go here…"></textarea></label><button class="primary-button full-button" id="summarize-photo" type="button">Make a short summary <span>→</span></button></section><article class="panel output-panel markdown-output" id="photo-output"><div class="empty-state"><span>◫</span><h3>Your summary will appear here</h3><p>Compare concise points with your original text.</p></div></article></div>
+        </section>
+
+        <section class="page" id="sheets-page">
+          <div class="page-intro"><div><p class="eyebrow">SIMPLE DATA TOOL</p><h2>View your sheet data</h2><p>Start with the sample class table, or connect a Google Apps Script web-app URL.</p></div><span class="feature-icon mint">▥</span></div>
+          <section class="panel sheet-connect"><div><strong>Google Apps Script endpoint</strong><p>Paste your published web-app URL to load live JSON data.</p></div><form id="sheet-url-form"><input id="sheet-url" type="url" placeholder="https://script.google.com/macros/s/…/exec" /><button class="secondary-button" type="submit">Connect</button></form></section>
+          <div class="sheet-layout"><section class="panel data-panel"><div class="panel-top"><div><h3>Student progress</h3><small id="sheet-source-label">Using sample data</small></div><button class="secondary-button compact" id="sheet-insight">Get insight ✦</button></div><div class="table-wrap"><table><thead><tr><th>Student</th><th>Subject</th><th>Score</th><th>Attendance</th></tr></thead><tbody id="sheet-table-body"></tbody></table></div></section><form class="panel add-row-form" id="sheet-add-form"><h3>Add a record</h3><label>Name<input name="name" required placeholder="Student name" /></label><label>Subject<input name="subject" required placeholder="Subject" /></label><label>Score<input name="score" required type="number" min="0" max="100" placeholder="0–100" /></label><label>Attendance<input name="attendance" required placeholder="e.g. 92%" /></label><button class="primary-button" type="submit">Add record <span>+</span></button></form></div>
+          <aside class="insight-card hidden" id="sheet-insight-output"></aside>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="settings-dialog" id="settings-dialog"><form method="dialog" class="settings-card"><button class="dialog-close" value="cancel" aria-label="Close settings">×</button><p class="eyebrow">OPTIONAL CONNECTION</p><h2>Use your own Gemini API key</h2><p>With no key, StudyMate uses built-in demo content. Your key is kept only for this browser session.</p><label>Gemini API key<input id="gemini-key" type="password" autocomplete="off" placeholder="Paste your key" /></label><label>Model name<input id="gemini-model" value="gemini-3.6-flash" /></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Cancel</button><button class="primary-button" id="save-settings" value="default">Save connection</button></div><p class="helper-text">For a public site, move API requests to a server before sharing it.</p></form></dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
